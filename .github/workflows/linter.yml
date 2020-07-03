@@ -48,7 +48,7 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-      - name: golangci-lint
+      - name: Lint Go
         uses: golangci/golangci-lint-action@v1
         with:
           # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
@@ -65,9 +65,9 @@ jobs:
         uses: actions/setup-node@v1
       - name: Checkout Repo
         uses: actions/checkout@master
-      - name: Install stylelint
-        run: npm install -g stylelint
-      - name: Lint CSS
+      - name: Install eslint
+        run: npm install -g eslint
+      - name: Lint JS/TS with eslint
         run: eslint
 
   standard_js:
@@ -82,7 +82,7 @@ jobs:
         uses: actions/checkout@master
       - name: Install standard js
         run: npm install -g standard
-      - name: Standard lint JS
+      - name: Lint JS/TS with standard js
         run: standard
 
   # json linting
@@ -98,7 +98,7 @@ jobs:
         uses: actions/checkout@master
       - name: Install jsonlint
         run: npm install -g jsonlint
-      - name: Lint json
+      - name: Lint Json
         run: jsonlint **/**.json
 
   # Markdown linting
@@ -131,7 +131,7 @@ jobs:
         uses: actions/checkout@master
       - name: Install flake8
         run: pip install flake8
-      - name: Lint with flake8
+      - name: Lint Python with flake8
         run: flake8 --ignore=E402,E501,W503
 
   black:
@@ -156,7 +156,7 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
-      - name: Run ShellCheck
+      - name: Check shell files
         uses: ludeeus/action-shellcheck@master
 
   # yaml linting
@@ -166,5 +166,5 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v1
-      - name: yaml-lint
+      - name: Lint Yaml
         uses: ibiqlik/action-yamllint@v1
