@@ -3,14 +3,13 @@ name: Linting
 on:
   push:
     branches:
-      - master
+      branches-ignore: [master]
   pull_request:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
   super_linter:
-    name: Lint Full Code Base
+    name: Lint Code Base
     runs-on: ubuntu-latest
 
     steps:
@@ -20,4 +19,5 @@ jobs:
       - name: Lint Code Base
         uses: docker://github/super-linter:v3
         env:
+          VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: master
