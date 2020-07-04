@@ -1,0 +1,170 @@
+name: Linting
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  # CSS linting
+  css:
+    name: CSS stylelint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install stylelint
+        run: npm install -g stylelint
+      - name: Lint CSS
+        run: stylelint
+
+  # Dockerfile linting
+  dockerfile:
+    name: Dockerfile dockerfilelint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install dockerfilelint
+        run: npm install -g dockerfilelint
+      - name: Lint Dockerfiles
+        run: dockerfilelint **/**Dockerfile**
+
+  # Go linting
+  go:
+    name: Go golangci-lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Lint Go
+        uses: golangci/golangci-lint-action@v1
+        with:
+          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
+          version: v1.26
+
+  # JS linting
+  eslint:
+    name: JS/TS eslint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install eslint
+        run: npm install -g eslint
+      - name: Lint JS/TS with eslint
+        run: eslint
+
+  standard_js:
+    name: JS/TS standard js
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install standard js
+        run: npm install -g standard
+      - name: Lint JS/TS with standard js
+        run: standard
+
+  # json linting
+  json:
+    name: json jsonlint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install jsonlint
+        run: npm install -g jsonlint
+      - name: Lint Json
+        run: jsonlint **/**.json
+
+  # Markdown linting
+  markdown:
+    name: Markdown markdownlint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install markdown-lint-cli
+        run: npm install -g markdownlint-cli
+      - name: Lint Markdown
+        run: markdownlint **/**.md
+
+  # Python linting
+  flake8:
+    name: Python flake8
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install flake8
+        run: pip install flake8
+      - name: Lint Python with flake8
+        run: flake8 --ignore=E402,E501,W503
+
+  black:
+    name: Python black
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install Black
+        run: pip install black
+      - name: Check Formatting with Black
+        run: black --check .
+
+  # Shell checks
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Check shell files
+        uses: ludeeus/action-shellcheck@master
+
+  # yaml linting
+  yaml:
+    name: Yaml yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v1
+      - name: Lint Yaml
+        uses: ibiqlik/action-yamllint@v1
