@@ -118,8 +118,8 @@ jobs:
         run: markdownlint **/**.md
 
   # Python linting
-  flake8:
-    name: Python flake8
+  pylint:
+    name: Python pylint
     runs-on: ubuntu-latest
 
     steps:
@@ -127,12 +127,15 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
+          architecture: 'x64'
       - name: Checkout Repo
         uses: actions/checkout@master
-      - name: Install flake8
-        run: pip install flake8
-      - name: Lint Python with flake8
-        run: flake8 --ignore=E402,E501,W503
+      - name: Set up pipenv environment
+        run: |
+          pip install pipenv
+          pipenv install --dev --deploy
+      - name: Run pylint
+        run: pipenv run pylint **/*.py
 
   black:
     name: Python black
@@ -142,6 +145,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
+          architecture: 'x64'
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Install Black
