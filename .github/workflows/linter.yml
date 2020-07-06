@@ -30,16 +30,13 @@ jobs:
     name: Dockerfile dockerfilelint
     runs-on: ubuntu-latest
     steps:
-      - name: Setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12'
       - name: Checkout Repo
         uses: actions/checkout@master
-      - name: Install dockerfilelint
-        run: npm install -g dockerfilelint
-      - name: Lint Dockerfiles
-        run: dockerfilelint **/**Dockerfile**
+      - name: lint
+        uses: luke142367/Docker-Lint-Action@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET: Dockerfile
 
   # Go linting
   go:
@@ -99,7 +96,7 @@ jobs:
       - name: Install jsonlint
         run: npm install -g jsonlint
       - name: Lint Json
-        run: jsonlint **/**.json
+        run: jsonlint **/*.json
 
   # Markdown linting
   markdown:
@@ -115,7 +112,7 @@ jobs:
       - name: Install markdown-lint-cli
         run: npm install -g markdownlint-cli
       - name: Lint Markdown
-        run: markdownlint **/**.md
+        run: markdownlint **/*.md
 
   # Python linting
   pylint:
@@ -133,7 +130,7 @@ jobs:
       - name: Set up pipenv environment
         run: |
           pip install pipenv
-          pipenv install --dev --deploy
+          pipenv sync --dev
       - name: Run pylint
         run: pipenv run pylint **/*.py
 
@@ -160,8 +157,10 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
-      - name: Check shell files
-        uses: ludeeus/action-shellcheck@master
+      - name: Install shellcheck
+        run: sudo apt install shellcheck
+      - name: Run shellcheck
+        run: shellcheck scripts/*
 
   # yaml linting
   yaml:
