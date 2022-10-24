@@ -12,7 +12,7 @@ to learn more about our system.
 <a title="Website" href="https://tuas.ucsd.edu">
   <img width="30" alt="Website Logo" src="https://user-images.githubusercontent.com/42757207/197566312-21687060-2d56-4728-ba50-99d40947572b.svg">
 </a>&nbsp
-<a title="Slack" href="https://join.slack.com/t/ucsdauvsi/shared_invite/zt-egz7acpu-KM1Ui3sdac54L34SPzTjVg">
+<a title="Slack" href="https://join.slack.com/t/ucsdauvsi/shared_invite/zt-1gmx245r8-z9nZ0PkuP~A8EZErzIPA3g">
   <img width="30" alt="Slack Logo" src="https://user-images.githubusercontent.com/42757207/197566468-aa39127d-aa62-4626-b539-316fb7c1a9c8.png">
 </a>&nbsp
 <a title="Discord" href="https://discord.gg/r92cxByR4z">
