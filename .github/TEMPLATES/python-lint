@@ -11,4 +11,6 @@ disable=unsubscriptable-object,
       too-many-ancestors,
       super-with-arguments,
       too-many-instance-attributes,
-      duplicate-code
+      duplicate-code,
+      bare-except,
+      broad-except
