@@ -2,8 +2,7 @@
 ## Welcome to Triton UAS
  
 We are a student-run team which designs, builds, tests, and flies our own UAV
-to compete each year in the Student UAS Competition put on by the AUVSI Seafarer
-Chapter against over 70 teams from around the world. Learn more about the
+to compete each year in the Student UAS Competition put on by RoboNation against over 70 teams from around the world. Learn more about the
 competition we compete at [here](https://suas-competition.org/) or read our
 [paper](https://tuas.ucsd.edu/blog/blog-post-21/)
 to learn more about our system.
